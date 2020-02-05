@@ -28,6 +28,7 @@ api = tweepy.API(auth,wait_on_rate_limit=True)
 csvFile=open('quero me matar','a')
 csvWriter =csv.writer(csvFile,delimiter=';')
 
+#Realiza a pesquisa dos tweets e armazena no arquivo
 for tweet in tweepy.Cursor(api.search,q = 'quero me matar -filter:retweets -filter:links -filter:images -filter:native_video',tweet_mode='extended', lang = "pt").items():
     if (not tweet.retweeted) and ('RT @' not in tweet.full_text):
         csvWriter.writerow([tweet.user.screen_name,tweet.created_at,tweet.user.location.replace('\n', ' '),tweet.full_text.replace('\n', ' ')])
